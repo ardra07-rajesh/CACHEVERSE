@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050b18" />
+  <meta name="description" content="CACHEVERSE is an interactive cache memory architecture and performance simulation studio." />
+  <title>CACHEVERSE | Memory Architecture Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <div><strong>CACHE<span>VERSE</span></strong><small>MEMORY ARCHITECTURE STUDIO</small></div>
+      </div>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list" id="navList">
+        <button class="nav-item active" data-page="overview"><i>◈</i><span>Overview</span><kbd>01</kbd></button>
+        <div class="nav-section">SIMULATION</div>
+        <button class="nav-item" data-page="simulator"><i>▦</i><span>Cache Simulator</span><kbd>02</kbd></button>
+        <button class="nav-item" data-page="mapping"><i>⌗</i><span>Mapping Studio</span><kbd>03</kbd></button>
+        <button class="nav-item" data-page="replacement"><i>⇄</i><span>Replacement Lab</span><kbd>04</kbd></button>
+        <button class="nav-item" data-page="address"><i>⌘</i><span>Address Analyzer</span><kbd>05</kbd></button>
+        <button class="nav-item" data-page="hierarchy"><i>▤</i><span>Memory Hierarchy</span><kbd>06</kbd></button>
+        <div class="nav-section">ANALYSIS</div>
+        <button class="nav-item" data-page="workload"><i>⌁</i><span>Workload Analyzer</span><kbd>07</kbd></button>
+        <button class="nav-item" data-page="benchmark"><i>◫</i><span>Performance Benchmark</span><kbd>08</kbd></button>
+        <button class="nav-item" data-page="experiments"><i>◷</i><span>Experiment History</span><kbd>09</kbd></button>
+        <div class="nav-section">RESOURCES</div>
+        <button class="nav-item" data-page="learning"><i>▧</i><span>Learning Centre</span><kbd>10</kbd></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="system-status"><span class="pulse"></span><div><b>SIMULATION ENGINE</b><small>READY · LOCAL MODE</small></div></div>
+        <button class="nav-item" data-page="settings"><i>⚙</i><span>Settings</span></button>
+        <div class="user-chip"><div class="avatar">CV</div><div><b>Research Workspace</b><small>COA LABORATORY</small></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+        <div class="crumb"><span>WORKSPACE</span><b>/</b><strong id="crumbTitle">Overview</strong></div>
+        <div class="top-actions">
+          <div class="engine-pill"><span class="pulse"></span> ENGINE ONLINE</div>
+          <button class="icon-button" id="globalSearchBtn" title="Search">⌕</button>
+          <button class="icon-button" id="helpBtn" title="Help">?</button>
+          <div class="top-avatar">AR</div>
+        </div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="page active" id="page-overview">
+          <div class="page-heading">
+            <div><div class="eyebrow"><span class="eyebrow-line"></span> MEMORY INTELLIGENCE PLATFORM</div><h1>Memory Architecture <em>Command Centre</em></h1><p>Explore cache behaviour, inspect memory access patterns and measure performance in real time.</p></div>
+            <button class="primary-btn" data-go="simulator">＋ New simulation <span>↗</span></button>
+          </div>
+          <div class="hero-architecture panel">
+            <div class="hero-copy"><div class="live-tag"><span class="pulse"></span> LIVE ARCHITECTURE VIEW</div><h2>Understand the path<br>behind every <em>memory access.</em></h2><p>Trace data movement through a layered memory system. Run a workload to see the architecture respond.</p><button class="outline-btn" data-go="hierarchy">Explore architecture <span>→</span></button></div>
+            <div class="chip-scene">
+              <div class="circuit-grid"></div>
+              <div class="data-stream stream-a"></div><div class="data-stream stream-b"></div>
+              <div class="cache-stack">
+                <div class="cache-layer layer-l1"><span class="layer-index">01 / FASTEST</span><strong>L1 CACHE</strong><small>32 KB · LOW LATENCY</small></div>
+                <div class="cache-layer layer-l2"><span class="layer-index">02 / BALANCED</span><strong>L2 CACHE</strong><small>256 KB · MID LATENCY</small></div>
+                <div class="cache-layer layer-l3"><span class="layer-index">03 / SHARED</span><strong>L3 CACHE</strong><small>8 MB · HIGHER CAPACITY</small></div>
+              </div>
+              <div class="float-metric metric-one"><small>LAST RUN HIT RATE</small><b id="heroHitRate">—</b><span>Awaiting workload</span></div>
+              <div class="float-metric metric-two"><small>MEMORY ACCESSES</small><b id="heroAccesses">0</b><span>Simulation events</span></div>
+              <div class="scene-label">FIG 01 <span>·</span> CACHE HIERARCHY MODEL</div>
+            </div>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-card"><div class="metric-top"><span>TOTAL ACCESSES</span><i>↗</i></div><strong id="metricAccesses">0</strong><small>Memory references processed</small><div class="metric-foot"><span class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>LIVE SESSION</span></div></div>
+            <div class="metric-card"><div class="metric-top"><span>CACHE HITS</span><i class="green">●</i></div><strong id="metricHits">0</strong><small>Data found in cache</small><div class="metric-foot"><span class="metric-dot green-bg"></span><span>HIT EVENTS</span></div></div>
+            <div class="metric-card"><div class="metric-top"><span>CACHE MISSES</span><i class="amber">●</i></div><strong id="metricMisses">0</strong><small>Data fetched from memory</small><div class="metric-foot"><span class="metric-dot amber-bg"></span><span>MISS EVENTS</span></div></div>
+            <div class="metric-card"><div class="metric-top"><span>HIT RATIO</span><i>◎</i></div><strong id="metricRatio">—</strong><small>Hits / total accesses</small><div class="metric-foot"><div class="tiny-track"><span id="ratioTrack"></span></div><span>EFFICIENCY</span></div></div>
+          </div>
+          <div class="content-grid two-col">
+            <div class="panel chart-panel"><div class="panel-heading"><div><span class="panel-kicker">PERFORMANCE TELEMETRY</span><h3>Access outcome distribution</h3></div><span class="period-tag">CURRENT RUN</span></div><div class="donut-wrap"><div class="donut" id="hitDonut"><div><strong id="donutPercent">—</strong><small>HIT RATIO</small></div></div><div class="legend"><div><i class="legend-dot cyan"></i><span>Cache hits</span><b id="legendHits">0</b></div><div><i class="legend-dot violet"></i><span>Cache misses</span><b id="legendMisses">0</b></div><div class="legend-note">Run a simulation to populate live metrics.</div></div></div></div>
+            <div class="panel chart-panel"><div class="panel-heading"><div><span class="panel-kicker">MEMORY ACCESS PROFILE</span><h3>Recent access activity</h3></div><span class="period-tag">LAST 20 STEPS</span></div><div class="bar-chart" id="activityChart"><div class="chart-empty">Simulation activity will appear here.</div></div><div class="chart-axis"><span>EARLIER</span><span>RECENT</span></div></div>
+          </div>
+          <div class="content-grid two-col lower-grid">
+            <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">QUICK ACCESS</span><h3>Simulation workbench</h3></div></div><div class="quick-grid"><button class="quick-card" data-go="simulator"><span>▦</span><b>Cache simulator</b><small>Run memory traces</small><i>↗</i></button><button class="quick-card" data-go="mapping"><span>⌗</span><b>Mapping studio</b><small>Inspect address mapping</small><i>↗</i></button><button class="quick-card" data-go="replacement"><span>⇄</span><b>Replacement lab</b><small>Compare eviction policies</small><i>↗</i></button><button class="quick-card" data-go="benchmark"><span>◫</span><b>Benchmark lab</b><small>Compare configurations</small><i>↗</i></button></div></div>
+            <div class="panel recent-panel"><div class="panel-heading"><div><span class="panel-kicker">WORKSPACE ACTIVITY</span><h3>Recent experiments</h3></div><button class="text-btn" data-go="experiments">View all →</button></div><div id="recentExperiments" class="recent-list"><div class="empty-row">No saved experiments yet. Run and save your first simulation.</div></div></div>
+          </div>
+        </section>
+
+        <section class="page" id="page-simulator">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> CORE SIMULATION ENGINE</div><h1>Cache <em>Simulator</em></h1><p>Configure a cache, feed it a memory trace and inspect every hit, miss and replacement decision.</p></div><div class="heading-actions"><button class="secondary-btn" id="loadDemo">Load demo trace</button><button class="primary-btn" id="runSimulation">Run simulation <span>▶</span></button></div></div>
+          <div class="sim-layout">
+            <div class="panel config-panel"><div class="panel-heading"><div><span class="panel-kicker">ARCHITECTURE CONFIGURATION</span><h3>Cache parameters</h3></div><span class="config-icon">⚙</span></div>
+              <label>Cache capacity<select id="cacheSize"><option value="1024">1 KB</option><option value="4096">4 KB</option><option value="8192">8 KB</option><option value="16384" selected>16 KB</option><option value="32768">32 KB</option><option value="65536">64 KB</option></select></label>
+              <label>Block size<select id="blockSize"><option value="16">16 bytes</option><option value="32" selected>32 bytes</option><option value="64">64 bytes</option><option value="128">128 bytes</option></select></label>
+              <label>Mapping technique<select id="mappingType"><option value="direct">Direct mapped</option><option value="fully">Fully associative</option><option value="set" selected>Set associative</option></select></label>
+              <label id="waysLabel">Associativity<select id="associativity"><option value="2" selected>2-way</option><option value="4">4-way</option><option value="8">8-way</option></select></label>
+              <label>Replacement policy<select id="policy"><option value="LRU" selected>LRU · Least Recently Used</option><option value="FIFO">FIFO · First In First Out</option><option value="RANDOM">Random replacement</option></select></label>
+              <div class="field-note">Cache lines are calculated automatically from capacity, block size and associativity.</div>
+              <div class="config-summary" id="configSummary">16 KB cache · 32 B blocks · 2-way</div>
+              <div class="divider"></div>
+              <label>Memory access sequence <textarea id="traceInput" rows="4">0, 32, 64, 0, 128, 32, 256, 0, 64, 32, 512, 0</textarea></label>
+              <small class="helper">Enter decimal byte addresses separated by commas or spaces.</small>
+              <div class="button-row"><button class="secondary-btn full" id="resetSimulation">Reset</button><button class="primary-btn full" id="stepSimulation">Next step →</button></div>
+            </div>
+            <div class="sim-main">
+              <div class="metric-grid compact">
+                <div class="metric-card"><div class="metric-top"><span>HITS</span><i class="green">●</i></div><strong id="simHits">0</strong></div>
+                <div class="metric-card"><div class="metric-top"><span>MISSES</span><i class="amber">●</i></div><strong id="simMisses">0</strong></div>
+                <div class="metric-card"><div class="metric-top"><span>HIT RATIO</span><i>◎</i></div><strong id="simRatio">—</strong></div>
+                <div class="metric-card"><div class="metric-top"><span>ACCESS STEP</span><i>⌁</i></div><strong id="simStep">0/0</strong></div>
+              </div>
+              <div class="panel cache-state-panel"><div class="panel-heading"><div><span class="panel-kicker">LIVE CACHE STATE</span><h3>Cache line allocation</h3></div><span class="live-tag small"><span class="pulse"></span> INTERACTIVE</span></div><div id="cacheGrid" class="cache-grid"><div class="cache-empty">Configure your cache and run a simulation to inspect the cache lines.</div></div><div class="cache-legend"><span><i class="legend-dot cyan"></i> Occupied</span><span><i class="legend-dot muted"></i> Empty</span><span><i class="legend-dot violet"></i> Recently accessed</span></div></div>
+              <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">EXECUTION TRACE</span><h3>Memory access log</h3></div><span class="period-tag" id="traceStatus">WAITING FOR RUN</span></div><div class="table-scroll"><table><thead><tr><th>STEP</th><th>ADDRESS</th><th>BLOCK</th><th>SET / LINE</th><th>TAG</th><th>RESULT</th><th>DETAIL</th></tr></thead><tbody id="traceTable"><tr><td colspan="7" class="empty-cell">Run the simulation to generate an execution trace.</td></tr></tbody></table></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-mapping">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> ADDRESS TRANSLATION WORKSPACE</div><h1>Mapping <em>Studio</em></h1><p>See how a main-memory address is divided and assigned to cache lines and sets.</p></div></div>
+          <div class="content-grid two-col">
+            <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">INPUT PARAMETERS</span><h3>Address decomposition</h3></div></div><label>Memory address (decimal)<input id="mapAddress" type="number" min="0" value="420" /></label><label>Cache size<select id="mapCacheSize"><option value="1024">1 KB</option><option value="4096">4 KB</option><option value="8192">8 KB</option><option value="16384" selected>16 KB</option><option value="32768">32 KB</option></select></label><label>Block size<select id="mapBlockSize"><option value="16">16 bytes</option><option value="32" selected>32 bytes</option><option value="64">64 bytes</option><option value="128">128 bytes</option></select></label><label>Mapping<select id="mapType"><option value="direct">Direct mapped</option><option value="fully">Fully associative</option><option value="set" selected>2-way set associative</option></select></label><button class="primary-btn full" id="analyzeMapping">Analyze address →</button></div>
+            <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">BIT-LEVEL INSPECTION</span><h3>Address structure</h3></div><span class="period-tag">BINARY VIEW</span></div><div class="address-binary" id="mappingBinary">00000000 00000000 00000001 10100100</div><div class="bit-legend"><span><i class="tag-color"></i> TAG</span><span><i class="index-color"></i> INDEX / SET</span><span><i class="offset-color"></i> OFFSET</span></div><div class="decomp-grid" id="mappingResults"></div></div>
+          </div>
+          <div class="panel mapping-explain"><div class="panel-heading"><div><span class="panel-kicker">HOW THE ADDRESS MAPS</span><h3>Cache placement visualization</h3></div></div><div id="mappingVisual" class="mapping-visual"></div></div>
+        </section>
+
+        <section class="page" id="page-replacement">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> EVICTION ALGORITHM LAB</div><h1>Replacement <em>Policy Lab</em></h1><p>Compare how FIFO, LRU and Random behave under the same memory access workload.</p></div><button class="primary-btn" id="comparePolicies">Compare policies <span>▶</span></button></div>
+          <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">TEST WORKLOAD</span><h3>Memory reference sequence</h3></div><span class="period-tag">SHARED INPUT</span></div><label>Block reference sequence<input id="policyTrace" value="1, 2, 3, 1, 4, 2, 5, 1, 2, 3, 4, 5" /></label><small class="helper">Enter memory block numbers separated by commas. Cache capacity is set to 3 blocks for this comparison.</small></div>
+          <div class="policy-grid" id="policyResults"><div class="panel policy-card"><span class="panel-kicker">FIFO</span><h3>First In First Out</h3><div class="policy-placeholder">Run comparison to see results.</div></div><div class="panel policy-card"><span class="panel-kicker">LRU</span><h3>Least Recently Used</h3><div class="policy-placeholder">Run comparison to see results.</div></div><div class="panel policy-card"><span class="panel-kicker">RANDOM</span><h3>Random replacement</h3><div class="policy-placeholder">Run comparison to see results.</div></div></div>
+        </section>
+
+        <section class="page" id="page-address">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> BINARY ADDRESS INSPECTOR</div><h1>Address <em>Analyzer</em></h1><p>Convert addresses and inspect their binary representation, block number and cache fields.</p></div></div>
+          <div class="content-grid two-col"><div class="panel"><div class="panel-heading"><div><span class="panel-kicker">ADDRESS INPUT</span><h3>Inspect a memory address</h3></div></div><label>Address format<select id="addressFormat"><option value="decimal">Decimal</option><option value="hex">Hexadecimal</option><option value="binary">Binary</option></select></label><label>Address value<input id="addressValue" value="420" /></label><label>Block size<select id="addressBlockSize"><option value="16">16 bytes</option><option value="32" selected>32 bytes</option><option value="64">64 bytes</option><option value="128">128 bytes</option></select></label><button class="primary-btn full" id="inspectAddress">Inspect address →</button></div><div class="panel"><div class="panel-heading"><div><span class="panel-kicker">ADDRESS CONVERSION</span><h3>Numeric representations</h3></div></div><div class="conversion-list" id="addressConversions"><div class="conversion-row"><span>DECIMAL</span><b>420</b></div><div class="conversion-row"><span>HEXADECIMAL</span><b>0x1A4</b></div><div class="conversion-row"><span>BINARY</span><b>110100100</b></div></div><div class="decomp-grid" id="addressDetails"></div></div></div>
+        </section>
+
+        <section class="page" id="page-hierarchy">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> MEMORY SYSTEM EXPLORER</div><h1>Memory <em>Hierarchy</em></h1><p>Explore the trade-off between memory speed, capacity and cost.</p></div></div>
+          <div class="panel hierarchy-panel"><div class="hierarchy-pyramid" id="hierarchyPyramid"><button class="hierarchy-level l-register" data-level="register"><b>REGISTERS</b><small>Fastest · Bytes</small></button><button class="hierarchy-level l1" data-level="l1"><b>L1 CACHE</b><small>~32–64 KB · Very low latency</small></button><button class="hierarchy-level l2" data-level="l2"><b>L2 CACHE</b><small>~256 KB–2 MB · Low latency</small></button><button class="hierarchy-level l3" data-level="l3"><b>L3 CACHE</b><small>~4–64 MB · Shared cache</small></button><button class="hierarchy-level ram" data-level="ram"><b>MAIN MEMORY</b><small>GB capacity · Higher latency</small></button><button class="hierarchy-level storage" data-level="storage"><b>SECONDARY STORAGE</b><small>TB capacity · Highest latency</small></button></div><div class="hierarchy-detail" id="hierarchyDetail"><span class="panel-kicker">SELECT A MEMORY LEVEL</span><h2>Memory hierarchy</h2><p>Select a layer to understand its role, typical capacity and relative access latency.</p></div></div>
+          <div class="panel amat-panel"><div class="panel-heading"><div><span class="panel-kicker">PERFORMANCE CALCULATOR</span><h3>Average Memory Access Time (AMAT)</h3></div><span class="formula-tag">AMAT = Hit time + (Miss rate × Miss penalty)</span></div><div class="amat-inputs"><label>Hit time (ns)<input id="amatHit" type="number" value="1" min="0" step="0.1"></label><label>Miss rate (%)<input id="amatMiss" type="number" value="5" min="0" max="100" step="0.1"></label><label>Miss penalty (ns)<input id="amatPenalty" type="number" value="80" min="0" step="1"></label><div class="amat-result"><small>CALCULATED AMAT</small><strong id="amatResult">5.00 ns</strong></div></div></div>
+        </section>
+
+        <section class="page" id="page-workload">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> MEMORY ACCESS PATTERN LAB</div><h1>Workload <em>Analyzer</em></h1><p>Generate memory traces and examine locality, frequency and access distribution.</p></div></div>
+          <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">TRACE GENERATOR</span><h3>Generate a memory workload</h3></div></div><div class="workload-controls"><label>Pattern<select id="workloadPattern"><option value="sequential">Sequential access</option><option value="random">Random access</option><option value="repeated">Repeated access</option><option value="locality" selected>Locality-heavy</option><option value="strided">Strided access</option></select></label><label>Number of accesses<input id="workloadCount" type="number" min="5" max="500" value="50"></label><label>Address range<select id="workloadRange"><option value="256">256 bytes</option><option value="1024" selected>1 KB</option><option value="4096">4 KB</option><option value="16384">16 KB</option></select></label><button class="primary-btn" id="generateWorkload">Generate trace ↗</button></div><label>Generated memory trace<textarea id="workloadOutput" rows="3" placeholder="Your generated address sequence will appear here..."></textarea></label><div class="button-row"><button class="secondary-btn" id="copyWorkload">Copy trace</button><button class="secondary-btn" id="useWorkload">Use in simulator →</button><label class="upload-btn">Import CSV<input type="file" id="csvUpload" accept=".csv,.txt" hidden></label></div></div>
+          <div class="content-grid two-col"><div class="panel"><div class="panel-heading"><div><span class="panel-kicker">ACCESS DISTRIBUTION</span><h3>Address frequency</h3></div></div><div id="frequencyChart" class="frequency-chart"><div class="chart-empty">Generate or import a workload to analyze its frequency.</div></div></div><div class="panel"><div class="panel-heading"><div><span class="panel-kicker">LOCALITY ANALYSIS</span><h3>Access pattern profile</h3></div></div><div id="localityStats" class="locality-stats"><div class="empty-row">Workload characteristics will appear here.</div></div></div></div>
+        </section>
+
+        <section class="page" id="page-benchmark">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> CONFIGURATION OPTIMIZATION</div><h1>Performance <em>Benchmark</em></h1><p>Run the same trace through multiple cache configurations and compare results.</p></div><button class="primary-btn" id="runBenchmark">Run benchmark <span>▶</span></button></div>
+          <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">BENCHMARK PARAMETERS</span><h3>Choose a workload</h3></div></div><label>Memory trace<input id="benchmarkTrace" value="0,32,64,0,128,32,256,0,64,32,512,0,128,256,0,32,64,128,512,0"></label><small class="helper">Benchmark uses the same addresses for each configuration. Block size is 32 bytes and replacement policy is LRU.</small></div>
+          <div class="content-grid two-col"><div class="panel"><div class="panel-heading"><div><span class="panel-kicker">HIT RATIO COMPARISON</span><h3>Cache capacity impact</h3></div></div><div id="benchmarkChart" class="benchmark-bars"><div class="chart-empty">Run benchmark to compare configurations.</div></div></div><div class="panel"><div class="panel-heading"><div><span class="panel-kicker">RESULT SUMMARY</span><h3>Benchmark observations</h3></div></div><div id="benchmarkSummary" class="summary-content">Results and recommendations will appear after a benchmark run.</div></div></div>
+          <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">DETAILED RESULTS</span><h3>Configuration comparison</h3></div><button class="text-btn" id="exportBenchmark">Export CSV ↓</button></div><div class="table-scroll"><table><thead><tr><th>CACHE SIZE</th><th>LINES</th><th>HITS</th><th>MISSES</th><th>HIT RATIO</th><th>AMAT (NS)</th></tr></thead><tbody id="benchmarkTable"><tr><td colspan="6" class="empty-cell">No benchmark results yet.</td></tr></tbody></table></div></div>
+        </section>
+
+        <section class="page" id="page-experiments">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> PERSONAL RESEARCH LOG</div><h1>Experiment <em>History</em></h1><p>Save configurations, revisit simulation results and build a record of your experiments.</p></div><button class="secondary-btn" id="exportExperiments">Export history ↓</button></div>
+          <div class="panel"><div class="panel-heading"><div><span class="panel-kicker">SAVED WORKSPACE DATA</span><h3>Experiments</h3></div><span class="period-tag" id="experimentCount">0 SAVED</span></div><div class="table-scroll"><table><thead><tr><th>EXPERIMENT</th><th>DATE</th><th>ACCESSES</th><th>HIT RATIO</th><th>CONFIGURATION</th><th>ACTIONS</th></tr></thead><tbody id="experimentTable"><tr><td colspan="6" class="empty-cell">No experiments saved yet. Complete a simulation and select Save experiment.</td></tr></tbody></table></div></div>
+        </section>
+
+        <section class="page" id="page-learning">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> COA KNOWLEDGE BASE</div><h1>Learning <em>Centre</em></h1><p>Understand the concepts behind cache memory through concise explanations and worked examples.</p></div></div>
+          <div class="learning-grid" id="learningGrid"></div>
+          <div class="panel lesson-panel" id="lessonPanel"><span class="panel-kicker">START LEARNING</span><h2>Cache memory fundamentals</h2><p>Choose a topic above to view its explanation, formula and example.</p></div>
+        </section>
+
+        <section class="page" id="page-settings">
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> WORKSPACE PREFERENCES</div><h1>System <em>Settings</em></h1><p>Manage your local CACHEVERSE workspace and simulation defaults.</p></div></div>
+          <div class="panel settings-panel"><div><h3>Workspace information</h3><p>All simulation processing happens locally in your browser. No account or API key is required.</p></div><div class="settings-row"><div><b>Local data storage</b><small>Experiments and preferences are saved in this browser.</small></div><span class="status-label">ENABLED</span></div><div class="settings-row"><div><b>Simulation engine</b><small>Deterministic cache mapping and replacement algorithms.</small></div><span class="status-label">READY</span></div><div class="settings-row"><div><b>Clear saved experiments</b><small>Delete experiment history from this browser.</small></div><button class="danger-btn" id="clearExperiments">Clear history</button></div><div class="settings-row"><div><b>Reset application data</b><small>Clear saved settings and experiments.</small></div><button class="danger-btn" id="resetApp">Reset workspace</button></div><div class="about-box"><div class="brand-mark"><span></span><span></span><span></span></div><div><b>CACHEVERSE <span>v1.0</span></b><small>INTELLIGENT MEMORY ARCHITECTURE STUDIO · COA PROJECT</small></div></div></div>
+        </section>
+      </div>
+      <footer class="footer"><span>© 2026 CACHEVERSE <i>·</i> INTELLIGENT MEMORY ARCHITECTURE STUDIO</span><span>LOCAL SIMULATION ENGINE <b>●</b></span></footer>
+    </main>
+  </div>
+  <div class="toast-container" id="toastContainer"></div>
+  <div class="modal-backdrop" id="saveModal"><div class="modal"><button class="modal-close" data-close>×</button><span class="panel-kicker">EXPERIMENT ARCHIVE</span><h2>Save this simulation</h2><p>Give your experiment a name so you can revisit it later.</p><label>Experiment name<input id="experimentName" placeholder="e.g. LRU vs sequential trace"></label><label>Notes<textarea id="experimentNotes" rows="3" placeholder="What are you investigating?"></textarea></label><div class="button-row"><button class="secondary-btn" data-close>Cancel</button><button class="primary-btn" id="confirmSave">Save experiment</button></div></div></div>
+  <div class="modal-backdrop" id="searchModal"><div class="modal search-modal"><button class="modal-close" data-close>×</button><span class="panel-kicker">QUICK NAVIGATION</span><h2>Find a workspace</h2><input id="searchInput" placeholder="Search modules..." /><div id="searchResults" class="search-results"></div></div></div>
+  <script src="js/engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
